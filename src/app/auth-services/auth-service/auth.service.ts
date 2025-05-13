@@ -12,6 +12,6 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   signup(signupRequest: any): Observable<any> {
-    return this.http.post(basicURL + "/signup", signupRequest)
+    return this.http.post<[]>(basicURL + "/signup", signupRequest)
   }
 }
