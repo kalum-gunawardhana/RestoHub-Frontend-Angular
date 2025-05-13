@@ -1,1 +1,80 @@
-<p>signup works!</p>
+<div class="bg" style="background-color: #F8F8F8;">
+    <nz-spin [nzSpinning]="isSpinning" [nzSize]="'large'" nzTip="Working...">
+        <div class="parent">
+            <div class="child">
+                <div nz-row class="imgDiv">
+                    <div nz-col nzSpan="24">
+                        <h1 style="margin-left: 80px;">SignUp</h1>
+                    </div>
+                </div>
+                <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" class="form-container">
+
+                    <nz-form-item>
+                        <nz-form-control nzHasFeedback [nzErrorTip]="emailErrorTpl">
+                            <input nz-input placeholder="E-mail" formControlName="email" id="email" />
+                            <ng-template #emailErrorTpl let-control>
+                                <ng-container *ngIf="control.hasError('required')">
+                                    Email is required!
+                                </ng-container>
+                                <ng-container *ngIf="control.hasError('email')">
+                                    Please enter a valid email!
+                                </ng-container>
+                            </ng-template>
+                        </nz-form-control>
+                    </nz-form-item>
+
+                    <nz-form-item>
+                        <nz-form-control nzHasFeedback [nzErrorTip]="errorPass">
+                            <input nz-input placeholder="Password" type="password" id="password"
+                                formControlName="password" (input)="updateConfirmValidator()" />
+                            <ng-template #errorPass let-control>
+                                <ng-container *ngIf="control.hasError('required')">
+                                    Password is required!
+                                </ng-container>
+                                <ng-container *ngIf="control.hasError('pattern')">
+                                    Password must contain at least 8 characters, including 1 uppercase, 1 lowercase, 1
+                                    number, and 1 special character
+                                </ng-container>
+                            </ng-template>
+                        </nz-form-control>
+                    </nz-form-item>
+
+                    <nz-form-item>
+                        <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
+                            <input nz-input type="password" placeholder="Confirm Password"
+                                formControlName="checkPassword" id="checkPassword" />
+                            <ng-template #errorTpl let-control>
+                                <ng-container *ngIf="control.hasError('required')">
+                                    Please confirm your password!
+                                </ng-container>
+                                <ng-container *ngIf="control.hasError('confirm')">
+                                    Passwords do not match!
+                                </ng-container>
+                            </ng-template>
+                        </nz-form-control>
+                    </nz-form-item>
+
+                    <nz-form-item>
+                        <nz-form-control nzHasFeedback [nzErrorTip]="userErrorTpl">
+                            <input nz-input placeholder="Full Name" id="name" formControlName="name" />
+                            <ng-template #userErrorTpl let-control>
+                                <ng-container *ngIf="control.hasError('required')">
+                                    Please enter your name!
+                                </ng-container>
+                            </ng-template>
+                        </nz-form-control>
+                    </nz-form-item>
+
+                    <div class="form-footer">
+                        <button nz-button class="register-button" [nzType]="'primary'" [disabled]="isSpinning">
+                            Register
+                        </button>
+                        <div class="login-link">
+                            Already have an account? <a routerLink="/login">Login now</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </nz-spin>
+</div>
